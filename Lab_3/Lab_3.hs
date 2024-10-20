@@ -49,18 +49,18 @@ mergeSort xs =
 
 
 allPairs :: [a] -> [b] -> [(a, b)]
-allPairs xs ys = [(x, y) | x <- xs, y <- ys] --return a tuple of singular elements from the list where x is an element of xs and y is an element of ys
+allPairs xs ys = [(x, y) | x <- xs, y <- ys] --return all tuples from the list where x is an element of xs and y is an element of ys
 
 --- >>> allPairs [1,2,3] ['a', 'b']
 -- [(1,'a'),(1,'b'),(2,'a'),(2,'b'),(3,'a'),(3,'b')]
 ---
 
 
-iterations :: Int -> (a -> a) -> a -> [a]
+iterations :: Int -> (a -> a) -> a -> [a] --iterations(IntRepresentingHowManyIterations, FunctionToApplyEveryIteration, inputToApplyTheIterationsTo) -> OutputListContainingIterations
 iterations 0 _ x = [x] -- 0 iterations of x just equals x
-iterations n f x = x : iterations (n - 1) f (f x) -- append x iterations to the list
+iterations n function x = x : iterations (n - 1) function (function x) -- recursively append x iterations to the list
 
---- >>> iterations 5 (+4) 1
--- [1,5,9,13,17,21]
+--- >>> iterations 5 (*5) 1
+-- [1,5,25,125,625,3125]
 ---
 
