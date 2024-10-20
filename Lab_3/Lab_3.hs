@@ -57,10 +57,10 @@ allPairs xs ys = [(x, y) | x <- xs, y <- ys] --return a tuple of singular elemen
 
 
 iterations :: Int -> (a -> a) -> a -> [a]
-iterations 0 _ x = [x]
-iterations n f x = x : iterations (n - 1) f (f x)
+iterations 0 _ x = [x] -- 0 iterations of x just equals x
+iterations n f x = x : iterations (n - 1) f (f x) -- append x iterations to the list
 
---- >>> iterations 5 (+2) 0
--- [0,2,4,6,8,10]
+--- >>> iterations 5 (+4) 1
+-- [1,5,9,13,17,21]
 ---
 
