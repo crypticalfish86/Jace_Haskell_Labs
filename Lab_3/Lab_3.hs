@@ -54,7 +54,7 @@ allPairs xs ys = [(x, y) | x <- xs, y <- ys] --return all tuples from the list w
 
 iterations :: Int -> (a -> a) -> a -> [a] --iterations(IntRepresentingHowManyIterations, FunctionToApplyEveryIteration, inputToApplyTheIterationsTo) -> OutputListContainingIterations
 iterations 0 _ x = [x] -- 0 iterations of x just equals x
-iterations n function x = x : iterations (n - 1) function (function x) -- recursively append x iterations to the list
+iterations n function x = x : iterations (n - 1) function (function x) -- recursively append x iterations to the list with the inputted function implemented
 
 --- >>> iterations 5 (2+) 1
 -- [1,3,5,7,9,11]
