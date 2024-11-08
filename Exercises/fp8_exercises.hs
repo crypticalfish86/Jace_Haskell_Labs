@@ -6,6 +6,8 @@ myProduct (x:xs) = x * myProduct xs
 --- >>> product [1, 2, 3, 4, 5]
 -- 120
 
+
+
 --Exercise 1
 myAnd :: [Bool] -> Bool
 myAnd [] = True
@@ -15,6 +17,8 @@ myAnd (x:xs) = if x == False then False else myAnd xs
 --- >>> myAnd [True, True, False]
 -- False
 
+
+
 myOr :: [Bool] -> Bool
 myOr []     = False
 myOr (x:xs) = if x == True then True else myOr xs
@@ -22,6 +26,8 @@ myOr (x:xs) = if x == True then True else myOr xs
 -- True
 --- >>> myOr [False, False, False]
 -- False
+
+
 
 myNor :: [Bool] -> Bool
 myNor []     = False
@@ -37,7 +43,16 @@ myNorHelper (x:xs) = if x == True then False else myNorHelper xs
 --- >>> myNor [False, False, False]
 -- False
 
+
+
 --concat
+myConcat :: [[a]] -> [a]
+myConcat [] = []
+myConcat (xs:xss) = xs ++ concat xss
+--- >>> concat [[1,2,3],[4,5,6,7,8], [9,10]]
+-- [1,2,3,4,5,6,7,8,9,10]
+
+
 
 --produces a list with n identical elements
 myReplicate :: Int -> a -> [a]
@@ -47,6 +62,15 @@ myReplicate n x = x : myReplicate (n - 1) x
 -- [2,2,2,2]
 
 -- !!
+myIndexingOperator :: [a] -> Int -> a
+myIndexingOperator (x:xs) 0 = x
+myIndexingOperator (x:xs) n = myIndexingOperator xs (n - 1)
+--- >>> myIndexingOperator [1,2,3] 2
+-- 3
+--- >>> myIndexingOperator [1,2,3] 1
+-- 2
+--- >>> myIndexingOperator [1,2,3] 0
+-- 1
 
 myElem :: Eq a => a -> [a] -> Bool
 myElem n [] = False
