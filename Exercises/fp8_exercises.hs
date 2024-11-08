@@ -15,6 +15,28 @@ myAnd (x:xs) = if x == False then False else myAnd xs
 --- >>> myAnd [True, True, False]
 -- False
 
+myOr :: [Bool] -> Bool
+myOr []     = False
+myOr (x:xs) = if x == True then True else myOr xs
+--- >>> myOr [False, False, True]
+-- True
+--- >>> myOr [False, False, False]
+-- False
+
+myNor :: [Bool] -> Bool
+myNor []     = False
+myNor (x:xs) = if x == True then myNorHelper xs else myNor xs
+
+myNorHelper :: [Bool] -> Bool
+myNorHelper [] = True
+myNorHelper (x:xs) = if x == True then False else myNorHelper xs
+--- >>>myNor [False, True, True]
+-- False
+--- >>> myNor [False, True, False]
+-- True
+--- >>> myNor [False, False, False]
+-- False
+
 --concat
 
 --produces a list with n identical elements
