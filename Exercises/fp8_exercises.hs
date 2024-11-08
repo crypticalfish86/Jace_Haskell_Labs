@@ -73,7 +73,7 @@ myIndexingOperator (x:xs) n = myIndexingOperator xs (n - 1)
 -- 1
 
 myElem :: Eq a => a -> [a] -> Bool
-myElem n [] = False
+myElem n []     = False
 myElem n (x:xs) = if x == n then True else myElem n xs 
 --- >>> myElem 2 [1, 1, 2, 1]
 -- True
@@ -83,15 +83,42 @@ myElem n (x:xs) = if x == n then True else myElem n xs
 
 --Exercise 2
 
+myInsert :: Int -> [Int] -> [Int]
+myInsert n []     = [n]
+myInsert n (x:xs) = if n <= x then n : x: xs else x : myInsert n xs
+--- >>> myInsert 3 [1,2,4]
+-- [1,2,3,4]
+
+myInsertionSort :: [Int] -> [Int]
+myInsertionSort []     = []
+myInsertionSort (x:xs) = myInsert x (myInsertionSort xs)
+--- >>> myInsertionSort [3,2,1,9,12,10]
+-- [1,2,3,9,10,12]
+
+
+
 merge :: Ord a => [a] -> [a] -> [a]
 merge xs [] = xs
 merge [] ys = ys
 merge (x:xs) (y:ys)
     | x <= y    = x : merge xs (y:ys)
     | otherwise = y : merge (x:xs) ys
---- >>> merge [1,8,9,10][1,2,3,4]
--- [1,1,2,3,4,8,9,10]
+--- >>> merge [1,8,9,10][1,2,3,4,5]
+-- [1,1,2,3,4,5,8,9,10]
 
 
 --Exercise 3
+--split
+split :: [a] -> ([a], [a])
+split xs = splitAt (length xs `div` 2) xs
+--- >>> split [1,2,3]
+-- ([1],[2,3])
+
 --msort
+mergeSort :: Ord a => [a] -> [a]
+mergeSort xs =
+  if null xs || length xs == 1 then xs
+  else merge (mergeSort left) (mergeSort right) 
+  where (left, right) = split xs
+--- >>> mergeSort [1,10,12,2,3,6]
+-- [1,2,3,6,10,12]
